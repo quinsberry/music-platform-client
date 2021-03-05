@@ -1,29 +1,32 @@
-import React from 'react';
+import React from 'react'
 
-interface Index {
-}
+import { PageTemplate } from '@layouts/PageTemplate'
 
-const Index: React.FC<Index> = (): React.ReactElement => {
+interface MainPage {}
+
+const MainPage: React.FC<MainPage> = (): React.ReactElement => {
     return (
         <>
-            <div className="center">
-                <h1>Welcome!</h1>
-                <h2>Here you can find the best tracks</h2>
-            </div>
+            <PageTemplate>
+                <div className="center">
+                    <h1>Welcome!</h1>
+                    <h2>Here you can find the best tracks</h2>
+                </div>
+            </PageTemplate>
 
             <style jsx>
                 {`
-                  .center {
-                    margin-top: 150px;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                  }
+                    .center {
+                        margin-top: 150px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                    }
                 `}
             </style>
         </>
-    );
-};
+    )
+}
 
-export default Index
+export default MainPage

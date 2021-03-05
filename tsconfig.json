@@ -21,7 +21,7 @@
       "@layouts/*": ["layouts/*"],
       "@store/*": ["store/*"],
       "@styles/*": ["styles/*"],
-      "@types/*": ["types/*"]
+      "@localTypes/*": ["types/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
