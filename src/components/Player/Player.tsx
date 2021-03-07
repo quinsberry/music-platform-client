@@ -8,11 +8,12 @@ import { Track } from '@localTypes/track'
 import Grid from '@material-ui/core/Grid'
 import { TrackProgress } from '@components/TrackProgress/TrackProgress'
 import { VolumeUp } from '@material-ui/icons'
+import { useTypedSelector } from '@hooks/useTypedSelector'
+import { useActions } from '@hooks/useActions'
 
 interface PlayerProps {}
 
 export const Player: FC<PlayerProps> = (): ReactElement => {
-    const active = false
     const track: Track = {
         _id: '1',
         name: 'test track name1',
@@ -24,9 +25,19 @@ export const Player: FC<PlayerProps> = (): ReactElement => {
         comments: [],
     }
 
+    const { pause, volume, duration, currentTime, active } = useTypedSelector((state) => state.player)
+    const { playTrack, pauseTrack } = useActions()
+    const handleOnPlay = () => {
+        if (pause) {
+            playTrack()
+        } else {
+            pauseTrack()
+        }
+    }
+
     return (
         <div className={styles.player}>
-            <IconButton onClick={() => {}}>{active ? <Pause /> : <PlayArrow />}</IconButton>
+            <IconButton onClick={handleOnPlay}>{!pause ? <Pause /> : <PlayArrow />}</IconButton>
             <Grid container direction="column" style={{ width: 200, margin: '0 20px' }}>
                 <div>{track.name}</div>
                 <div style={{ fontSize: 12, color: 'gray' }}>{track.artist}</div>
