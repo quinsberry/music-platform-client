@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button'
 import { useRouter } from 'next/router'
 import TextField from '@material-ui/core/TextField'
 import { FileType, FileUpload } from '@components/FileUpload/FileUpload'
+import { useInput } from '@hooks/useInput'
+import axios from 'axios'
 
 interface CreateTrackPage {}
 
@@ -15,9 +17,30 @@ const CreateTrackPage: React.FC<CreateTrackPage> = (): React.ReactElement => {
     const [activeStep, setActiveStep] = useState(0)
     const [picture, setPicture] = useState(null)
     const [audio, setAudio] = useState(null)
+    const name = useInput('')
+    const artist = useInput('')
+    const lyrics = useInput('')
 
     const handleOnNext = () => {
-        if (activeStep === 2) return
+        if (activeStep === 2) {
+            const formData = new FormData()
+            formData.append('name', name.value)
+            formData.append('text', lyrics.value)
+            formData.append('artist', artist.value)
+            formData.append('picture', picture)
+            formData.append('audio', audio)
+
+            const createNewTrack = async () => {
+                try {
+                    await axios.post('http://localhost:5000/tracks', formData)
+                    router.push('/tracks')
+                } catch (e) {
+                    console.log(e)
+                }
+            }
+
+            createNewTrack()
+        }
         setActiveStep((prev) => prev + 1)
     }
 
@@ -31,9 +54,9 @@ const CreateTrackPage: React.FC<CreateTrackPage> = (): React.ReactElement => {
             <StepWrapper activeStep={activeStep}>
                 {activeStep === 0 && (
                     <Grid container direction="column" style={{ padding: 20 }}>
-                        <TextField style={{ margin: 5 }} label="Track name" />
-                        <TextField style={{ margin: 5 }} label="Artist name" />
-                        <TextField style={{ margin: 5 }} label="Lyrics" />
+                        <TextField {...name} style={{ margin: 5 }} label="Track name" />
+                        <TextField {...artist} style={{ margin: 5 }} label="Artist name" />
+                        <TextField {...lyrics} style={{ margin: 5 }} label="Lyrics" rows={3} multiline />
                     </Grid>
                 )}
                 {activeStep === 1 && (

@@ -10,6 +10,7 @@ import Delete from '@material-ui/icons/Delete'
 
 import styles from './TrackItem.module.scss'
 import { useRouter } from 'next/router'
+import { useActions } from '@hooks/useActions'
 
 interface TrackItemProps {
     track: Track
@@ -18,10 +19,14 @@ interface TrackItemProps {
 
 export const TrackItem: FC<TrackItemProps> = ({ track, active = false }): ReactElement => {
     const router = useRouter()
+    const { playTrack, setActiveTrack } = useActions()
 
     const handleCardClick = () => router.push(`/tracks/${track._id}`)
     const handlePlayClick = (e) => {
         e.stopPropagation()
+
+        setActiveTrack(track)
+        playTrack()
     }
     const handleDeleteClick = (e) => {
         e.stopPropagation()
@@ -30,7 +35,7 @@ export const TrackItem: FC<TrackItemProps> = ({ track, active = false }): ReactE
     return (
         <Card className={styles.track} onClick={handleCardClick}>
             <IconButton onClick={handlePlayClick}>{active ? <Pause /> : <PlayArrow />}</IconButton>
-            <img width={70} height={70} src={track.picture} alt={'Track image'} />
+            <img width={70} height={70} src={`http://localhost:5000/${track.picture}`} alt={'Track image'} />
             <Grid container direction="column" style={{ width: 200, margin: '0 20px' }}>
                 <div>{track.name}</div>
                 <div style={{ fontSize: 12, color: 'gray' }}>{track.artist}</div>

@@ -20,8 +20,8 @@
       "@hooks/*": ["hooks/*"],
       "@layouts/*": ["layouts/*"],
       "@store/*": ["store/*"],
-      "@styles/*": ["styles/*"],
-      "@localTypes/*": ["types/*"]
+      "@localTypes/*": ["types/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

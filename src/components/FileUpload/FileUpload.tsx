@@ -21,7 +21,7 @@ export const FileUpload: FC<FileUploadProps> = ({ setFile, accept, children }): 
 
     return (
         <div onClick={handleOnClick}>
-            <input type="file" accept={accept} style={{ display: 'none' }} ref={ref} />
+            <input type="file" accept={accept} style={{ display: 'none' }} ref={ref} onChange={handleOnChange} />
             {children}
         </div>
     )
