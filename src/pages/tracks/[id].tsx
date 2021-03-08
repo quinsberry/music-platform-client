@@ -36,7 +36,10 @@ const TrackPage: FC<TrackPageProps> = ({ serverTrack }): ReactElement => {
     }
 
     return (
-        <PageTemplate>
+        <PageTemplate
+            title={`${track.artist} - ${track.name}`}
+            keywords={`Music, artists, ${track.name}, ${track.artist}`}
+        >
             <Button variant="outlined" onClick={handleBackToList}>
                 Back to track list
             </Button>

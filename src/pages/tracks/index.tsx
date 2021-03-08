@@ -22,7 +22,7 @@ const TracksPage: React.FC<TracksPage> = (): React.ReactElement => {
     }
 
     return (
-        <PageTemplate>
+        <PageTemplate title="Track list">
             <Grid container justifyContent={'center'}>
                 <Card style={{ width: 900 }}>
                     <Box p={2}>
